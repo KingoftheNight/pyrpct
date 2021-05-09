@@ -1,16 +1,27 @@
 # import packages #############################################################
 
-import Read
-import Blast
-import Extract
-import TES
-import Plot
-import Filter
-import Res
-import Intlen
 import argparse
 import os
 now_path = os.getcwd()
+
+try:
+    from . import Read
+    from . import Blast
+    from . import Extract
+    from . import TES
+    from . import Plot
+    from . import Filter
+    from . import Res
+    from . import Intlen
+except ImportError:
+    import Read
+    import Blast
+    import Extract
+    import TES
+    import Plot
+    import Filter
+    import Res
+    import Intlen
 
 
 # fuctions ####################################################################
