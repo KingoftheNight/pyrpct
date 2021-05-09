@@ -53,8 +53,12 @@ def parse_blast(args):
     print('\n>>>Blasting PSSM matrix...\n')
     if len(args.folder) == len(args.output):
         for eachdir in range(len(args.folder)):
-            Blast.blast_psiblast_linux(args.folder[eachdir], args.database[0], args.num_iterations[0],
-                                       args.expected_value[0], args.output[eachdir], now_path)
+            try:
+                Blast.blast_psiblast_linux(args.folder[eachdir], args.database[0], args.num_iterations[0],
+                                           args.expected_value[0], args.output[eachdir], now_path)
+            except ImportError:
+                Blast.blast_psiblast_windows(args.folder[eachdir], args.database[0], args.num_iterations[0],
+                                           args.expected_value[0], args.output[eachdir], now_path)
     else:
         print('\n>>>ERROR: The number of input folders and output folders is not equal.\n')
 
