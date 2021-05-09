@@ -2,6 +2,7 @@
 
 import argparse
 import os
+import platform
 now_path = os.getcwd()
 
 try:
@@ -29,7 +30,10 @@ except ImportError:
 # make database
 def parse_makedb(args):
     print('\n>>>Making database...\n')
-    Blast.blast_makedb_linux(args.file[0], args.output[0])
+    if(platform.system()=='Linux'):
+    	Blast.blast_makedb_linux(args.file[0], args.output[0])
+    if(platform.system()=='Windows'):
+    	Blast.blast_makedb_windows(args.file[0], args.output[0])
 
 
 # check database
@@ -53,10 +57,10 @@ def parse_blast(args):
     print('\n>>>Blasting PSSM matrix...\n')
     if len(args.folder) == len(args.output):
         for eachdir in range(len(args.folder)):
-            try:
+            if(platform.system()=='Linux'):
                 Blast.blast_psiblast_linux(args.folder[eachdir], args.database[0], args.num_iterations[0],
                                            args.expected_value[0], args.output[eachdir], now_path)
-            except ImportError:
+            if(platform.system()=='Windows'):
                 Blast.blast_psiblast_windows(args.folder[eachdir], args.database[0], args.num_iterations[0],
                                            args.expected_value[0], args.output[eachdir], now_path)
     else:
@@ -141,12 +145,18 @@ def parse_mhy(args):
 
 # ray blast
 def parse_rblast(args):
-    Blast.blast_rayblast_linux(args.folder[0], args.out[0], now_path)
+    if(platform.system()=='Linux'):
+        Blast.blast_rayblast_linux(args.folder[0], args.out[0], now_path)
+    if(platform.system()=='Windows'):
+    	Blast.blast_rayblast_windows(args.folder[0], args.out[0], now_path)
 
 
 # ray supplement
 def parse_rsup(args):
-    Blast.blast_raysup_linux(args.folder[0], args.out[0], now_path)
+    if(platform.system()=='Linux'):
+        Blast.blast_raysup_linux(args.folder[0], args.out[0], now_path)
+    if(platform.system()=='Windows'):
+    	Blast.blast_raysup_windows(args.folder[0], args.out[0], now_path)
 
 
 # view raac map
@@ -311,3 +321,4 @@ def rpct_main():
 # main ########################################################################
 if __name__ == '__main__':
     rpct_main()
+
