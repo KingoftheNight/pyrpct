@@ -98,7 +98,7 @@ def res_reduce(data):
             tube_b.append(float(data[j]))
             # 欧氏距离
             distance = res_ojld(tube_a, tube_b)
-            print(index[i] + "&" + index[j] + ' 欧式距离：' + str('%.4f' % distance))
+            print('\r>>>' + index[i] + "&" + index[j] + ' 欧式距离：' + str('%.4f' % distance), end='', flush=True)
             euclidean_box[index[i] + "&" + index[j]] = str('%.4f' % distance)
             time.sleep(0.01)
     print('>>>>>>>>>>>>>>>>>')
