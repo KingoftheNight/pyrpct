@@ -60,7 +60,7 @@ def plot_eval_density(evaluate_score, out):
     for key in evaluate_score:
         values.append(float(key[4]) * 100)
     s = pd.Series(values)
-    sns.distplot(s, bins=10, hist=False, kde=True, axlabel='ACC')
+    sns.kdeplot(s, bins=10, hist=False, kde=True, axlabel='ACC')
     plt.savefig(os.path.join(out, 'ACC_Density.png'), dpi=300)
     plt.show()
 
