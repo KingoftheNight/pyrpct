@@ -9,7 +9,13 @@ setup(name='pyrpct',
     author_email='1694822092@qq.com',
     license='BSD 2-Clause',
     packages=['pyrpct'],
-    install_requires=[],
+    install_requires=[
+        'numpy',
+        'matplotlib',
+        'scikit-learn',
+        'seaborn',
+        'pyecharts'
+        ],
     entry_points={
         'console_scripts': [
         'pyrpct=pyrpct.__main__:rpct_main',
