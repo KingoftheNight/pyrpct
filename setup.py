@@ -13,7 +13,7 @@ setup(name='pyrpct',
         'numpy',
         'matplotlib',
         'scikit-learn',
-        'seaborn==-0.10.1',
+        'seaborn==0.10.1',
         'pyecharts'
         ],
     entry_points={
