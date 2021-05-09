@@ -9,6 +9,7 @@ from Read import read_pca
 import pandas as pd
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import MinMaxScaler
+from Visual import easy_time
 import numpy as np
 
 
@@ -132,7 +133,7 @@ def filter_test(d, feature, c_number, gamma, crossv, now_path):
         single_acc = str('%.4f' % (standard_num[4]))
         fs_acc.append(single_acc)
         os.remove('./mid-ifs')
-        print('>>>' + str(start_e) + '~' + str(len(feature)))
+        easy_time(start_e, len(feature))
     return fs_acc
 
 
@@ -165,7 +166,7 @@ def filter_main(in_path, out_path, c_number, gamma, crossv, cycle, raa, reduce, 
     start_num = 0
     for each_number in range(len(feature_line[0])):
         start_num += 1
-        print('\r>>>' + str(start_num) + '~' + str(len(feature_line[0])), end='', flush=True)
+        easy_time(start_num, len(feature_line[0]))
         type_relief = filter_relief(each_number, feature_class, feature_line, int(cycle))  # 求得每个特征relief
         type_fscore = filter_fscore(each_number, feature_class, feature_line)  # 求得每个特征f-score
         complex_num = 1 / (math.exp(-type_relief) + 1) + 1 / (math.exp(-type_fscore) + 1)
