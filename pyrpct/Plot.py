@@ -51,7 +51,7 @@ def plot_eval_histogram(data, d_index, d_class, out, type_r):
     plt.title('ACC of each ' + d_class)  # 标题
     plt.grid(axis="y", c='g', linestyle='dotted')
     plt.savefig(os.path.join(out, 'ACC_' + d_class + '.png'), dpi=300)  # 保存
-    plt.show()
+    plt.close()
 
 
 # 密度图
@@ -62,7 +62,7 @@ def plot_eval_density(evaluate_score, out):
     s = pd.Series(values)
     sns.kdeplot(s, bins=10, hist=False, kde=True, axlabel='ACC')
     plt.savefig(os.path.join(out, 'ACC_Density.png'), dpi=300)
-    plt.show()
+    plt.close()
 
 
 # 热力图
@@ -95,7 +95,7 @@ def plot_eval_heatmap(evaluate_score, evaluate_key, out, t_s_index, s_s_index):
     ax.set_xticklabels(t_s_index)
     ax.set_yticklabels(s_s_index)
     plt.savefig(os.path.join(out, 'ACC_Heatmap.png'), dpi=400)
-    plt.show()
+    plt.close()
 
 
 # evaluate plot
