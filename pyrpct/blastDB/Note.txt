@@ -1,0 +1,1 @@
+This is the default folder which you can save your blast databases.

@@ -1,0 +1,24 @@
+>document_evaluate
+预测成功率(Accuracy, Acc):
+
+Acc = (TP + TN) / (TP + FP + TN + FN)
+
+敏感度(Sensitivity, SN)也称召回率(Recall, RE):
+
+Sn = Recall = TP / (TP + FN)
+
+特异性(Specificity, SP):
+
+Sp = TN / (TN + FP)
+
+精确率(Precision, PR)也称阳极预测值(Positive Predictive Value, PPV):
+
+Precision= PPV = TP / (TP + FP)
+
+Matthew 相关系数(Matthew's correlation coefficient, Mcc):
+
+MCC = (TP*TN- FP*FN)/sqrt((TP + FP)*(TN + FN)*(TP + FN)*(TN + FP)).其中sqrt代表开平方.
+>author_information
+Auther:     YuChao Liang
+Email:      1694822092@qq.com
+Address:    College of Life Science, Inner Mongolia University

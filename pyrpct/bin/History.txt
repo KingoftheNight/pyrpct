@@ -1,0 +1,57 @@
+
+════════════════ Thu Apr 22 09:37:25 2021 ════════════════
+E:\show\RPCT-new
+read      test-p.txt -o tp
+read      test-n.txt -o tn
+makedb    pdbaa -o pdbaa
+checkdb   pdbaa
+makedb    ND_pdbaa -o pdbaa
+blast     tp -db pdbaa -n 3 -ev 0.001 -o pssm-tp
+blast     tn -db pdbaa -n 3 -ev 0.001 -o pssm-tn
+extract   pssm-tp pssm-tn -raa .\rpct\raacDB\raaCODE -o Feature -l 5
+extract   pssm-tp pssm-tn -selfraac AGST-RK-ND-C-QE-H-ILMV-FY-P-W -o  -l 5
+search    -d t1s10_rpct.fs
+search    -f Feature
+eval      -d t1s10_rpct.fs -c 2048 -g 0.0001220703125 -cv 5 -o t1s10
+eval      -f Feature -cg Hyperparameter.txt -cv 5 -o Eval_fs
+filter    Feature\t19s8_rpct.fs -c 32 -g 0.001953125 -cv 5 -o t19s8 -r 10
+fffs      Feature\t19s8_rpct.fs -f t19s8\Fsort-ifs.txt -n 436 -o t19s8_436
+roc       Feature\t19s8_rpct.fs -o t19s8 -c 32 -g 0.001953125
+train     -d Feature\t19s8_rpct.fs -c 32 -g 0.001953125 -o t19s8.model.model
+train     -f Feature -cg Hyperparameter.txt -o Model
+predict   Feature\t19s8_rpct.fs -m t19s8.model -o t19s8
+edit      raaCODE
+makehys   Feature -o Hys_1.txt -c 8 -g 0.125
+intlen    -tf Feature -pf Feature -ef Eval_fs\Features_eval.csv -cg Hyperparameter.txt -m 5
+pca       Feature\t19s8_rpct.fs -o t19s8 -c 32 -g 0.001953125 -cv 5
+res       ARGP820103
+view      raaCODE -t 19
+weblogo   PSSMs\pssm-tp\1 -raa raaCODE -r t19s8 -o t19s8
+
+════════════════ Sat May  8 10:59:36 2021 ════════════════
+E:\rpct_package
+read      test-p.txt -o tp
+read      test-n.txt -o tn
+blast     tp -db pdbaa -n 3 -ev 0.001 -o pssm-tp
+blast     tn -db pdbaa -n 3 -ev 0.001 -o pssm-tn
+extract   pssm-tp pssm-tn -raa .\pyrpct\raacDB\raaCODE -o Train_fs -l 5
+extract   pssm-tp pssm-tn -selfraac  -o  -l 5
+search    -d t1s6_rpct.fs
+
+════════════════ Sat May  8 15:59:25 2021 ════════════════
+E:\rpct_package
+search    -f Train_fs
+train     -d t1s6_rpct.fs -c 2048 -g 3.0517578125e-05 -o t1s6.model.model
+
+════════════════ Sat May  8 16:30:47 2021 ════════════════
+E:\rpct_package
+train     -f Train_fs -cg Hyperparameter.txt -o Model_fs
+eval      -d t1s6_rpct.fs -c 2048 -g 3.0517578125e-05 -cv 5 -o t1s6
+eval      -f Train_fs -cg Hyperparameter.txt -cv 5 -o Eval_fs
+
+════════════════ Sat May  8 17:27:20 2021 ════════════════
+E:\rpct_package
+predict   t1s6_rpct.fs -m t1s6.model -o t1s6
+checkdb   pdbaa
+edit      raaCODE
+makedb    ND_pdbaa -o test
