@@ -150,8 +150,8 @@ def filter_main(in_path, out_path, c_number, gamma, crossv, cycle, raa, reduce, 
         in_file.close()
     feature_class = []
     feature_line = []
-    for lines in d:
-        lines = lines.strip('\n')
+    for i in range(len(d)):
+        lines = d[i].strip('\n')
         feature_class.append(lines.split(' ')[0])
         mid_box = lines.split(' ')[1:]
         if len(mid_box[-1]) == 0:
@@ -159,9 +159,9 @@ def filter_main(in_path, out_path, c_number, gamma, crossv, cycle, raa, reduce, 
         # mid_box = filter_check(mid_box, num)
         feature_line.append(mid_box)
         out = lines.split(' ')[0] + ' '
-        for i in mid_box:
-            out += i + ' '
-        d[d.index(lines + '\n')] = out + '\n'
+        for j in mid_box:
+            out += j + ' '
+        d[i] = out + '\n'
     relief_list = []
     start_num = 0
     for each_number in range(len(feature_line[0])):
