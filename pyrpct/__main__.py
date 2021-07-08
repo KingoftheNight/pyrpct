@@ -3,7 +3,9 @@
 import argparse
 import os
 import platform
+import subprocess
 now_path = os.getcwd()
+file_path = os.path.dirname(__file__)
 
 try:
     from . import Read
@@ -73,7 +75,7 @@ def parse_extract(args):
     if args.reduce_aa:
         Extract.extract_main(args.folder[0], args.folder[1], args.output[0], args.reduce_aa[0], args.lmda[0], now_path)
     else:
-        Extract.extract_main(args.folder[0], args.folder[1], 'none', args.self_raac[0], args.lmda[0], now_path)
+        Extract.extract_main(args.folder[0], args.folder[1], args.output[0], args.self_raac[0], args.lmda[0], now_path)
 
 
 # search best factors
@@ -167,6 +169,13 @@ def parse_view(args):
 # weblogo
 def parse_weologo(args):
     Plot.plot_weblogo_main(args.file[0], args.raa_name[0], args.reduce_type[0], args.out[0], now_path)
+
+
+# windows
+def parse_windows(args):
+    command = 'python ' + os.path.join(file_path, 'RPCT_windows.py')
+    outcode = subprocess.Popen(command, shell=True)
+    outcode.wait()
 
 
 # argparse ####################################################################
@@ -310,6 +319,9 @@ def rpct_main():
     parser_wo.add_argument('-r', '--reduce_type', nargs=1, help='reduce type and size')
     parser_wo.add_argument('-o', '--out', nargs=1, help='output file name')
     parser_wo.set_defaults(func=parse_weologo)
+    # windows
+    parser_ws = subparsers.add_parser('windows', add_help=False, help='open windows GUI')
+    parser_ws.set_defaults(func=parse_windows)
 
     args = parser.parse_args()
     try:
